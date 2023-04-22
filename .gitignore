@@ -1,3 +1,5 @@
+config.ini
+.idea
 # Logs
 logs
 *.log
