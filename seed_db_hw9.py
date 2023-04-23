@@ -10,7 +10,7 @@ def seeds_db():
         data = json.load(json_file)
         for i in data:
             author = Authors(fullname=i.get('fullname'),
-                             born_date=i.get('born_date'),
+                             date_born=i.get('date_born'),
                              born_location=i.get('born_location'),
                              bio=i.get('bio')) \
                 .save()

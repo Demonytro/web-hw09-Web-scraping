@@ -16,7 +16,7 @@ class QuoteItem(Item):
 
 class AuthorItem(Item):
     fullname = Field()
-    born_date = Field()
+    date_born = Field()
     born_location = Field()
     bio = Field()
 
@@ -64,7 +64,7 @@ class MainSpider(scrapy.Spider):
     def parse_author(self, response, *args):
         content = response.xpath("/html//div[@class='author-details']")
         fullname = content.xpath("h3[@class='author-title']/text()").get().strip()
-        born_date = content.xpath("p/span[@class='author-born-date']/text()").get().strip()
+        date_born = content.xpath("p/span[@class='author-born-date']/text()").get().strip()
         born_location = content.xpath("p/span[@class='author-born-location']/text()").get().strip()
         bio = content.xpath("div[@class='author-description']/text()").get().strip()
         yield AuthorItem(fullname=fullname, date_born=date_born, born_location=born_location, bio=bio)
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     process = CrawlerProcess()
     process.crawl(MainSpider)
     process.start()
-    # process.join()
+    process.join()
     print('End')
 
     seed_cloud_db = input('Заполнить базу данных? (yes)>>> ')
